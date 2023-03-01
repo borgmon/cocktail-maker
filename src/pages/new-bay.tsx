@@ -24,7 +24,7 @@ export default function NewDrink() {
   };
 
   const save = () => {
-    setError();
+    setError(undefined);
     if (!!!bay.ingredient) {
       setError("ingredient is empty");
       return;
@@ -48,7 +48,7 @@ export default function NewDrink() {
       {error && (
         <div
           className="alert alert-warning shadow-lg"
-          onClick={() => setError()}
+          onClick={() => setError(undefined)}
         >
           <div>
             <svg

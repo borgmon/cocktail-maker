@@ -11,7 +11,7 @@ import { Drink } from "@/pages/api/drinks";
 import { useRouter } from "next/router";
 
 export default function NewDrink() {
-  const router = useRouter()
+  const router = useRouter();
   const [drink, setDrink] = useState<Drink>({
     id: 0,
     name: "",
@@ -55,29 +55,34 @@ export default function NewDrink() {
   };
 
   const saveDrink = () => {
-    setError();
-    if (!!!drink.name){
-      console.log(drink.name)
+    setError(undefined);
+    if (!!!drink.name) {
+      console.log(drink.name);
       setError("name is empty");
-      return
+      return;
     }
-    if (drink.ingredients.length === 0){
+    if (drink.ingredients.length === 0) {
       setError("ingredients are empty");
-      return
+      return;
     }
     fetch("/api/drinks", {
       method: "POST",
       body: JSON.stringify(drink),
-    }).then(()=>router.push("/"))
-    .catch((err) => {
-      setError(err.toString());
-    });
+    })
+      .then(() => router.push("/"))
+      .catch((err) => {
+        setError(err.toString());
+      });
   };
 
   return (
     <div className="container mx-auto">
-      {error && <div className="alert alert-warning shadow-lg" onClick={()=>setError()}>
-          <div >
+      {error && (
+        <div
+          className="alert alert-warning shadow-lg"
+          onClick={() => setError(undefined)}
+        >
+          <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="stroke-current flex-shrink-0 h-6 w-6"
@@ -93,7 +98,8 @@ export default function NewDrink() {
             </svg>
             <span>{error}</span>
           </div>
-        </div>}
+        </div>
+      )}
       <div className="my-4">
         <div className="form-control">
           <label className="input-group">
@@ -102,7 +108,7 @@ export default function NewDrink() {
               type="text"
               placeholder="Martini"
               className="input input-bordered"
-              onChange={(e)=>changeName(e.target.value)}
+              onChange={(e) => changeName(e.target.value)}
             />
           </label>
         </div>

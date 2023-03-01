@@ -33,11 +33,20 @@ export type DrinkCardSingleProps = {
 export function DrinkCardSingle({ drink }: DrinkCardSingleProps) {
   return (
     <div className="card w-60 max-h-30 bg-base-100 shadow-xl">
-      <figure><Image src="https://placekitten.com/500/500" width={500} height={500} alt={drink?.name} /></figure>
+      <figure>
+        <Image
+          src="https://placekitten.com/500/500"
+          width={500}
+          height={500}
+          alt={drink?.name!}
+        />
+      </figure>
       <div className="card-body  ">
         <h2 className="card-title">{drink?.name}</h2>
         {drink?.ingredients.map((ing, j) => (
-          <p key={j}>{ing.name} {ing.amount} oz</p>
+          <p key={j}>
+            {ing.name} {ing.amount} oz
+          </p>
         ))}
       </div>
     </div>

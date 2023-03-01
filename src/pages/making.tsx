@@ -6,7 +6,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { Drink } from "@/pages/api/drinks";
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: { query: { id: any } }) {
   return {
     props: {
       id: context.query.id,
