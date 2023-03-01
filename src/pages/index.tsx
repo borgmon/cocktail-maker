@@ -16,7 +16,7 @@ export default function Home() {
   
   return (
     <>
-      <div className="px-4 mx-auto">
+      <div className="px-4 mx-auto my-5">
         <DrinkCard drinks={drinks?.drinks!}></DrinkCard>
       </div>
       <PlusButton callback={()=>{router.push("/new-drink")}}></PlusButton>

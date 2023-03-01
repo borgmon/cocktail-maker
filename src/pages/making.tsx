@@ -39,7 +39,7 @@ export default function Drinks({ id }: { id: string }) {
   return (
     <>
       <div className="container mx-auto w-max my-5">
-        <DrinkCardSingle drink={drink}></DrinkCardSingle>
+        <DrinkCardSingle drink={drink} showDel={false}></DrinkCardSingle>
       </div>
       <div className="container mx-auto my-5 text-center">
         <progress

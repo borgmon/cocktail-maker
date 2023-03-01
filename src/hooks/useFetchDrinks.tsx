@@ -9,6 +9,6 @@ export default function useFetchDrinks() {
     fetch("/api/drinks")
       .then((data) => data.json())
       .then((json) => setDrinks(json));
-  });
+  },[]);
   return drinks
 }

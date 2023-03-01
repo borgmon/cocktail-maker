@@ -18,7 +18,7 @@ export let drinks: Drinks = {
       ],
     },
     {
-      id: 1,
+      id: 2,
       name: "Jack Rose",
       ingredients: [
         {
@@ -36,42 +36,8 @@ export let drinks: Drinks = {
       ],
     },
     {
-      id: 1,
-      name: "Martini",
-      ingredients: [
-        {
-          name: "gin",
-          amount: 2.5,
-        },
-        {
-          name: "dry vermouth",
-          amount: 0.5,
-        },
-        {
-          name: "dry vermouth",
-          amount: 0.5,
-        },
-        {
-          name: "dry vermouth",
-          amount: 0.5,
-        },
-        {
-          name: "dry vermouth",
-          amount: 0.5,
-        },
-        {
-          name: "dry vermouth",
-          amount: 0.5,
-        },
-        {
-          name: "dry vermouth",
-          amount: 0.5,
-        },
-      ],
-    },
-    {
-      id: 1,
-      name: "Jack Rose",
+      id: 3,
+      name: "Crazy",
       ingredients: [
         {
           name: "Applejack",
@@ -85,36 +51,20 @@ export let drinks: Drinks = {
           name: "Grenadine",
           amount: 0.5,
         },
-      ],
-    },
-    {
-      id: 1,
-      name: "Martini",
-      ingredients: [
         {
-          name: "gin",
-          amount: 2.5,
-        },
-        {
-          name: "dry vermouth",
+          name: "A",
           amount: 0.5,
         },
-      ],
-    },
-    {
-      id: 1,
-      name: "Jack Rose",
-      ingredients: [
         {
-          name: "Applejack",
-          amount: 2,
+          name: "B",
+          amount: 0.5,
         },
         {
-          name: "lime juice",
-          amount: 1,
+          name: "C",
+          amount: 0.5,
         },
         {
-          name: "Grenadine",
+          name: "D",
           amount: 0.5,
         },
       ],

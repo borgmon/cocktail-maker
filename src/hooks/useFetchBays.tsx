@@ -8,6 +8,12 @@ export default function useFetchBays() {
     fetch("/api/bays")
       .then((data) => data.json())
       .then((json) => setBays(json));
-  });
+  },[]);
   return bays
+}
+export function DelBay(id: string) {
+  return fetch("/api/bays/" + id, {
+    method: "DELETE",
+  })
+  .catch((e) => console.error(e));
 }

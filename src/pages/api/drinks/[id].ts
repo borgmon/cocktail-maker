@@ -1,11 +1,11 @@
 import { drinks } from '@/data';
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Drink } from '../drinks';
+import { Drink, Res } from '../drinks';
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Drink>
+  res: NextApiResponse<Drink|Res>
 ) {
   const { query, method } = req
   switch (method) {
@@ -19,6 +19,10 @@ export default function handler(
       break
     case 'POST':
       res.status(200)
+      break
+    case 'DELETE':
+      drinks.drinks = drinks.drinks.filter((exist) => exist.id.toString() !== req.query.id)
+      res.status(200).json({ "status": "ok" });
       break
     default:
       res.setHeader('Allow', ['GET', 'PUT'])

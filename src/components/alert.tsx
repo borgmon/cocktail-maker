@@ -28,7 +28,6 @@ export function AlertMessage(props: AlertMessageProps) {
       {!!props.msg && (
         <div className={classType} onClick={() => props.onClick()}>
           <div>
-            <p>{classType}</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

@@ -6,9 +6,18 @@ export default function useFetchDrink(id: string) {
   const [drink, setDrink] = useState<Drink>();
 
   useEffect(() => {
-    fetch("/api/bays"+id)
+    fetch("/api/drinks/" + id)
       .then((data) => data.json())
-      .then((json) => setDrink(json));
-  });
-  return drink
+      .then((json) => 
+      {console.log(json);
+      setDrink(json);});
+  },[]);
+  return drink;
+}
+
+export function DelDrink(id: string) {
+  return fetch("/api/drinks/" + id, {
+    method: "DELETE",
+  })
+  .catch((e) => console.error(e));
 }
