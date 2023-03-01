@@ -161,7 +161,7 @@ export default function NewDrink() {
       </div>
       <div className="my-2">
         <div className="dropdown">
-          <label tabIndex={0} className="btn m-1">
+          <label tabIndex={0} className="btn m-1 btn-accent">
             Add Ingredient
           </label>
           <ul

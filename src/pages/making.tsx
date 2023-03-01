@@ -5,6 +5,7 @@ import {
 } from "@/components/drinkCard";
 import React, { useEffect, useState } from "react";
 import { Drink } from "@/pages/api/drinks";
+import useFetchDrink from "@/hooks/useFetchDrink";
 
 export async function getServerSideProps(context: { query: { id: any } }) {
   return {
@@ -16,7 +17,8 @@ export async function getServerSideProps(context: { query: { id: any } }) {
 
 export default function Drinks({ id }: { id: string }) {
   const [progress, setProgress] = useState(0);
-  const [drink, setDrink] = useState<Drink>();
+  const drink = useFetchDrink(id);
+
   useEffect(() => {
     if (progress < 100) {
       const interval = setInterval(() => {
@@ -27,12 +29,6 @@ export default function Drinks({ id }: { id: string }) {
       };
     }
   }, [progress]);
-
-  useEffect(() => {
-    fetch("/api/drinks/" + id)
-      .then((data) => data.json())
-      .then((json) => setDrink(json));
-  });
 
   const styles = {
     "--value": progress,

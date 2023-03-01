@@ -23,6 +23,8 @@ export default function handler(
       res.status(200).json(bays);
       break
     case 'POST':
+      const newBay = JSON.parse(req.body) as Bay
+      bays.bays.push(newBay)
       res.status(200).json({ "status": "ok" })
       break
     default:

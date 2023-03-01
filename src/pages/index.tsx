@@ -7,17 +7,13 @@ import { Drinks } from "@/pages/api/drinks";
 import { DrinkCard } from "@/components/drinkCard";
 import { PlusButton } from "@/components/plusButton";
 import { useRouter } from "next/router";
+import useFetchDrinks from "@/hooks/useFetchDrinks";
 
 
 export default function Home() {
   const router = useRouter()
-  const [drinks, setDrinks] = useState<Drinks>({ drinks: [] });
-  useEffect(() => {
-    fetch("/api/drinks")
-      .then((res) => res.json())
-      .then((json) => setDrinks(json))
-      .catch((err) => console.log(err));
-  });
+  const drinks = useFetchDrinks()
+  
   return (
     <>
       <div className="px-4 mx-auto">

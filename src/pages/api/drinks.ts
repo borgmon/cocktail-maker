@@ -30,7 +30,8 @@ export default function handler(
       res.status(200).json(drinks);
       break
     case 'POST':
-      console.log(req.body)
+      const body = JSON.parse(req.body) as Drink
+      drinks.drinks.push(body)
       res.status(200).json({ "status": "ok" })
       break
     default:

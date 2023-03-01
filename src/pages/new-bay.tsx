@@ -9,10 +9,12 @@ import { PlusButton } from "@/components/plusButton";
 import { Bay, Bays } from "./api/bays";
 import { Drink } from "@/pages/api/drinks";
 import { useRouter } from "next/router";
+import useFetchBays from "@/hooks/useFetchBays";
 
 export default function NewDrink() {
   const router = useRouter();
   const [bay, setBay] = useState<Bay>({ id: 0, ingredient: "" });
+  const bays = useFetchBays()
   const [error, setError] = useState<string>();
 
   const changeAmount = (num: number) => {
@@ -31,6 +33,10 @@ export default function NewDrink() {
     }
     if (!!!bay.id) {
       setError("id is empty");
+      return;
+    }
+    if (bays.bays.find((exist)=>exist.id===bay.id)){
+      setError("bay is occupied");
       return;
     }
     fetch("/api/bays", {

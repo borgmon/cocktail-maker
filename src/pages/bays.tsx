@@ -8,16 +8,11 @@ import { Drink } from "@/pages/api/drinks";
 import { Bays } from "@/pages/api/bays";
 import { PlusButton } from "@/components/plusButton";
 import { useRouter } from "next/router";
+import useFetchBays from "@/hooks/useFetchBays";
 
 export default function BaysPage() {
-  const [bays, setBays] = useState<Bays>({  bays: [] });
+  const bays = useFetchBays()
   const router = useRouter()
-  
-  useEffect(()=>{
-    fetch('/api/bays')
-    .then((data)=>data.json())
-    .then((json)=>setBays(json))
-  })
 
   return (
     <div className="container mx-auto">

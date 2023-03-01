@@ -7,7 +7,7 @@ export function PlusButton({ callback }: { callback: () => void }) {
   return (
     <div className="h-32 w-70 sticky inset-1.5 z-10">
       <div className="absolute bottom-0 right-0 h-16 w-16">
-        <button className="btn btn-circle" onClick={()=>callback()}>
+        <button className="btn btn-circle btn-accent" onClick={()=>callback()}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
