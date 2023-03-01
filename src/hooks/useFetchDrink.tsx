@@ -15,7 +15,7 @@ export default function useFetchDrink(id: string) {
   return drink;
 }
 
-export function DelDrink(id: string) {
+export function DelDrink(id: number) {
   return fetch("/api/drinks/" + id, {
     method: "DELETE",
   })

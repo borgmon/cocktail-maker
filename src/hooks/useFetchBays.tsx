@@ -11,7 +11,7 @@ export default function useFetchBays() {
   },[]);
   return bays
 }
-export function DelBay(id: string) {
+export function DelBay(id: number) {
   return fetch("/api/bays/" + id, {
     method: "DELETE",
   })

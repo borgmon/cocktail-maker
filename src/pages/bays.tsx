@@ -1,11 +1,3 @@
-import {
-  DrinkCardProps,
-  DrinkCardSingle,
-  DrinkCardSingleProps,
-} from "@/components/drinkCard";
-import React, { useEffect, useState } from "react";
-import { Drink } from "@/pages/api/drinks";
-import { Bays } from "@/pages/api/bays";
 import { PlusButton } from "@/components/plusButton";
 import { useRouter } from "next/router";
 import useFetchBays, { DelBay } from "@/hooks/useFetchBays";
@@ -14,7 +6,7 @@ export default function BaysPage() {
   const bays = useFetchBays()
   const router = useRouter()
 
-  const delBay = (id: string) =>{
+  const delBay = (id: number) =>{
     DelBay(id).then(()=>router.reload())
   }
 

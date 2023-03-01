@@ -2,7 +2,7 @@ import { Drink, Drinks } from "@/pages/api/drinks";
 import Link from "next/link";
 import Image from "next/image";
 import router from "next/router";
-import { DelDrink, useDelDrink } from "@/hooks/useFetchDrink";
+import { DelDrink } from "@/hooks/useFetchDrink";
 
 export type DrinkCardProps = {
   drinks: Drink[] | null | undefined;
@@ -29,14 +29,14 @@ export function DrinkCardSingle({
   drink,
   showDel = false,
 }: DrinkCardSingleProps) {
-  const delDrink = (id: string) => {
+  const delDrink = (id: number) => {
     DelDrink(id).then(()=>router.reload())
   };
   return (
     <div className="card w-60 max-h-30 bg-base-100 shadow-xl indicator">
       {!!showDel && (
         <div className="indicator-item">
-          <button className="btn btn-error" onClick={() => delDrink(drink?.id)}>
+          <button className="btn btn-error" onClick={() => delDrink(drink?.id!)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

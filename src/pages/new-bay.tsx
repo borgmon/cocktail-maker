@@ -1,22 +1,12 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
-import { Drinks } from "@/pages/api/drinks";
-import { DrinkCard } from "@/components/drinkCard";
-import { PlusButton } from "@/components/plusButton";
-import { Bay, Bays } from "./api/bays";
-import { Drink } from "@/pages/api/drinks";
+import { useState } from "react";
+import { Bay } from "./api/bays";
 import { useRouter } from "next/router";
 import useFetchBays from "@/hooks/useFetchBays";
 import {
   AlertMessage,
-  AlertMessageProps,
   AlertMessageType,
   AlertType,
 } from "@/components/alert";
-import { AlertContext } from "@/contexts/AlertContext";
 
 export default function NewDrink() {
   const router = useRouter();
