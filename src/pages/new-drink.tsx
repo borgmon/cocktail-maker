@@ -9,7 +9,12 @@ import { PlusButton } from "@/components/plusButton";
 import { Bays } from "./api/bays";
 import { Drink } from "@/pages/api/drinks";
 import { useRouter } from "next/router";
-import { AlertMessage, AlertMessageProps, AlertMessageType, AlertType } from "@/components/alert";
+import {
+  AlertMessage,
+  AlertMessageProps,
+  AlertMessageType,
+  AlertType,
+} from "@/components/alert";
 
 export default function NewDrink() {
   const router = useRouter();
@@ -28,7 +33,7 @@ export default function NewDrink() {
     fetch("/api/bays")
       .then((data) => data.json())
       .then((json) => setBays(json));
-  });
+  }, []);
 
   const addRow = (thing: string) => {
     drink.ingredients.push({ name: thing, amount: 0.5 });
@@ -80,7 +85,11 @@ export default function NewDrink() {
 
   return (
     <div className="container mx-auto">
-      <AlertMessage type={alert.type} msg={alert.msg} onClick={()=>setAlert({...alert, msg:""})}></AlertMessage>
+      <AlertMessage
+        type={alert.type}
+        msg={alert.msg}
+        onClick={() => setAlert({ ...alert, msg: "" })}
+      ></AlertMessage>
       <div className="my-4">
         <div className="form-control">
           <label className="input-group">
