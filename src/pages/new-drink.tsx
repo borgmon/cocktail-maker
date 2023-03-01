@@ -9,6 +9,7 @@ import { PlusButton } from "@/components/plusButton";
 import { Bays } from "./api/bays";
 import { Drink } from "@/pages/api/drinks";
 import { useRouter } from "next/router";
+import { AlertMessage, AlertMessageProps, AlertMessageType, AlertType } from "@/components/alert";
 
 export default function NewDrink() {
   const router = useRouter();
@@ -18,7 +19,10 @@ export default function NewDrink() {
     ingredients: [],
   });
   const [bays, setBays] = useState<Bays>({ bays: [] });
-  const [error, setError] = useState<string>();
+  const [alert, setAlert] = useState<AlertMessageType>({
+    type: AlertType.warning,
+    msg: "",
+  });
 
   useEffect(() => {
     fetch("/api/bays")
@@ -55,14 +59,13 @@ export default function NewDrink() {
   };
 
   const saveDrink = () => {
-    setError(undefined);
+    setAlert({ type: AlertType.warning, msg: "" });
     if (!!!drink.name) {
-      console.log(drink.name);
-      setError("name is empty");
+      setAlert({ type: AlertType.warning, msg: "name is empty" });
       return;
     }
     if (drink.ingredients.length === 0) {
-      setError("ingredients are empty");
+      setAlert({ type: AlertType.warning, msg: "ingredients are empty" });
       return;
     }
     fetch("/api/drinks", {
@@ -71,35 +74,13 @@ export default function NewDrink() {
     })
       .then(() => router.push("/"))
       .catch((err) => {
-        setError(err.toString());
+        setAlert({ type: AlertType.error, msg: err });
       });
   };
 
   return (
     <div className="container mx-auto">
-      {error && (
-        <div
-          className="alert alert-warning shadow-lg"
-          onClick={() => setError(undefined)}
-        >
-          <div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="stroke-current flex-shrink-0 h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-              />
-            </svg>
-            <span>{error}</span>
-          </div>
-        </div>
-      )}
+      <AlertMessage type={alert.type} msg={alert.msg} onClick={()=>setAlert({...alert, msg:""})}></AlertMessage>
       <div className="my-4">
         <div className="form-control">
           <label className="input-group">

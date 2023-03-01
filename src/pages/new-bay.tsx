@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { Drinks } from "@/pages/api/drinks";
 import { DrinkCard } from "@/components/drinkCard";
 import { PlusButton } from "@/components/plusButton";
@@ -10,12 +10,22 @@ import { Bay, Bays } from "./api/bays";
 import { Drink } from "@/pages/api/drinks";
 import { useRouter } from "next/router";
 import useFetchBays from "@/hooks/useFetchBays";
+import {
+  AlertMessage,
+  AlertMessageProps,
+  AlertMessageType,
+  AlertType,
+} from "@/components/alert";
+import { AlertContext } from "@/contexts/AlertContext";
 
 export default function NewDrink() {
   const router = useRouter();
   const [bay, setBay] = useState<Bay>({ id: 0, ingredient: "" });
-  const bays = useFetchBays()
-  const [error, setError] = useState<string>();
+  const bays = useFetchBays();
+  const [alert, setAlert] = useState<AlertMessageType>({
+    type: AlertType.warning,
+    msg: "",
+  });
 
   const changeAmount = (num: number) => {
     setBay({ ...bay, id: bay.id + num });
@@ -26,54 +36,44 @@ export default function NewDrink() {
   };
 
   const save = () => {
-    setError(undefined);
+    setAlert({ ...alert, msg: "" });
     if (!!!bay.ingredient) {
-      setError("ingredient is empty");
+      setAlert({ type: AlertType.warning, msg: "ingredient is empty" });
       return;
     }
     if (!!!bay.id) {
-      setError("id is empty");
+      setAlert({ type: AlertType.warning, msg: "id is empty" });
       return;
     }
-    if (bays.bays.find((exist)=>exist.id===bay.id)){
-      setError("bay is occupied");
+    if (bays.bays.find((exist) => exist.id === bay.id)) {
+      setAlert({ type: AlertType.warning, msg: "bay is occupied" });
       return;
     }
     fetch("/api/bays", {
       method: "POST",
       body: JSON.stringify(bay),
     })
-      .then(() => router.push("/bays"))
+      .then(() => {
+        router.push({
+          pathname: "/bays",
+          query: {
+            msg: "save success",
+          },
+        });
+      })
       .catch((err) => {
-        setError(err.toString());
+        setAlert({ type: AlertType.error, msg: err });
       });
   };
 
   return (
     <div className="container mx-auto">
-      {error && (
-        <div
-          className="alert alert-warning shadow-lg"
-          onClick={() => setError(undefined)}
-        >
-          <div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="stroke-current flex-shrink-0 h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-              />
-            </svg>
-            <span>{error}</span>
-          </div>
-        </div>
-      )}
+      <AlertMessage
+        type={alert.type}
+        msg={alert.msg}
+        onClick={() => setAlert({ ...alert, msg: "" })}
+      ></AlertMessage>
+
       <div className="my-4">
         <div className="form-control">
           <label className="input-group">
