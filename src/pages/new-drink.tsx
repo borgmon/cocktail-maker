@@ -25,12 +25,6 @@ export default function NewDrink() {
       .then((data) => data.json())
       .then((json) => setBays(json));
   });
-  // useEffect(() => {
-  //   fetch("/api/drinks")
-  //     .then((res) => res.json())
-  //     .then((json) => setDrinks(json))
-  //     .catch((err) => console.log(err));
-  // });
 
   const addRow = (thing: string) => {
     drink.ingredients.push({ name: thing, amount: 0.5 });

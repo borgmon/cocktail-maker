@@ -6,10 +6,13 @@ import {
 import React, { useEffect, useState } from "react";
 import { Drink } from "@/pages/api/drinks";
 import { Bays } from "@/pages/api/bays";
+import { PlusButton } from "@/components/plusButton";
+import { useRouter } from "next/router";
 
 export default function BaysPage() {
   const [bays, setBays] = useState<Bays>({  bays: [] });
-
+  const router = useRouter()
+  
   useEffect(()=>{
     fetch('/api/bays')
     .then((data)=>data.json())
@@ -36,6 +39,8 @@ export default function BaysPage() {
           </tbody>
         </table>
       </div>
+      <PlusButton callback={()=>{router.push("/new-bay")}}></PlusButton>
+
     </div>
   );
 }

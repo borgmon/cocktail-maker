@@ -1,3 +1,4 @@
+import { Res } from './drinks';
 import { bays } from './../../data';
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { drinks } from "@/data";
@@ -14,7 +15,7 @@ export type Bay = {
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Bays>
+  res: NextApiResponse<Bays|Res>
 ) {
   const { query, method } = req
   switch (method) {
@@ -22,7 +23,7 @@ export default function handler(
       res.status(200).json(bays);
       break
     case 'POST':
-      res.status(200)
+      res.status(200).json({ "status": "ok" })
       break
     default:
       res.setHeader('Allow', ['GET', 'PUT'])
