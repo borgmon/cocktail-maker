@@ -1,5 +1,6 @@
 import { Drink, Drinks } from "@/pages/api/drinks";
 import Link from "next/link";
+import Image from "next/image";
 import router from "next/router";
 
 export type DrinkCardProps = {
@@ -31,11 +32,12 @@ export type DrinkCardSingleProps = {
 
 export function DrinkCardSingle({ drink }: DrinkCardSingleProps) {
   return (
-    <div className="card w-96 max-h-30 h-60 bg-base-100 shadow-xl">
-      <div className="card-body overflow-auto">
+    <div className="card w-60 max-h-30 bg-base-100 shadow-xl">
+      <figure><Image src="https://placekitten.com/500/500" width={500} height={500} alt={drink?.name} /></figure>
+      <div className="card-body  ">
         <h2 className="card-title">{drink?.name}</h2>
         {drink?.ingredients.map((ing, j) => (
-          <p key={j}>{ing.name}</p>
+          <p key={j}>{ing.name} {ing.amount} oz</p>
         ))}
       </div>
     </div>

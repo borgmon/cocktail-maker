@@ -42,10 +42,10 @@ export default function Drinks({ id }: { id: string }) {
 
   return (
     <>
-      <div className="container mx-auto w-max my-10">
+      <div className="container mx-auto w-max my-5">
         <DrinkCardSingle drink={drink}></DrinkCardSingle>
       </div>
-      <div className="container mx-auto my-10 text-center">
+      <div className="container mx-auto my-5 text-center">
         <progress
           className="progress progress-primary w-60"
           value={progress}

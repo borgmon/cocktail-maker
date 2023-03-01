@@ -123,6 +123,14 @@ export let drinks: Drinks = {
 };
 
 export let bays: Bays = {
-  total: 3,
-  bays: [],
+  bays: [
+    {
+      id: 1,
+      ingredient: "gin",
+    },
+    {
+      id: 2,
+      ingredient: "dry vermouth",
+    },
+  ],
 };

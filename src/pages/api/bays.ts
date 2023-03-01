@@ -4,12 +4,12 @@ import { drinks } from "@/data";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export type Bays = {
-  total: number,
   bays: Bay[]
 }
 
 export type Bay = {
   ingredient: string,
+  id: number,
 }
 
 export default function handler(

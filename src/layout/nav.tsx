@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Nav(): JSX.Element {
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 sticky top-0 z-10">
       <div className="flex-1">
         <Link href="/" className="btn btn-ghost normal-case text-xl">
           Cocktail Maker

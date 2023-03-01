@@ -16,10 +16,13 @@ export type Ingredient = {
   name: string,
   amount: number,
 }
+export type Res = {
+  status: string,
+}
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Drinks>
+  res: NextApiResponse<Drinks | Res>
 ) {
   const { query, method } = req
   switch (method) {
@@ -27,7 +30,8 @@ export default function handler(
       res.status(200).json(drinks);
       break
     case 'POST':
-      res.status(200)
+      console.log(req.body)
+      res.status(200).json({ "status": "ok" })
       break
     default:
       res.setHeader('Allow', ['GET', 'PUT'])

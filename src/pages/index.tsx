@@ -5,10 +5,12 @@ import styles from "@/styles/Home.module.css";
 import { useEffect, useState } from "react";
 import { Drinks } from "@/pages/api/drinks";
 import { DrinkCard } from "@/components/drinkCard";
+import { PlusButton } from "@/components/plusButton";
+import { useRouter } from "next/router";
 
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const router = useRouter()
   const [drinks, setDrinks] = useState<Drinks>({ drinks: [] });
   useEffect(() => {
     fetch("/api/drinks")
@@ -17,8 +19,11 @@ export default function Home() {
       .catch((err) => console.log(err));
   });
   return (
-    <div className="mx-5">
-      <DrinkCard drinks={drinks?.drinks!}></DrinkCard>
-    </div>
+    <>
+      <div className="px-4 mx-auto">
+        <DrinkCard drinks={drinks?.drinks!}></DrinkCard>
+      </div>
+      <PlusButton callback={()=>{router.push("/new-drink")}}></PlusButton>
+    </>
   );
 }
